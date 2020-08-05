@@ -22,37 +22,60 @@ end
 #data = hash, occupation = string
 #return contestants name matching occupation
 def get_contestant_name(data, occupation)
+  person = nil
   data.each do |season_number, contestants_hashes|
     contestants_hashes.each do |contestant|
       if contestant["occupation"] == occupation
-        return contestant["name"]
+        person = contestant["name"]
       end
     end
     # binding.pry
   end
+  person
 end
 
 
 #data = hash, hometown = string
 #return a counter of the number of contestants from the hometown string
 def count_contestants_by_hometown(data, hometown)
-  contestant["count"] = nil
-  hometown_count = nil
+  contestant_count = 0
   data.each do |season_number, contestants_hashes|
     contestants_hashes.each do |contestant|
       if contestant["hometown"] == hometown
-        contestant[:count] += 1
-        hometown_count = contestant[:count] 
+        contestant_count += 1
       end
     end
   end
-  return hometown_count
+  return contestant_count
 end
 
+#data = hash, hometown = string
+#return the occupation of the first person from hometown
 def get_occupation(data, hometown)
-  # code here
+  data.each do |season_number, contestants_hashes|
+    contestants_hashes.each do |contestant|
+      if contestant["hometown"] == hometown
+        return contestant["occupation"]
+      end
+    end
+  end
 end
 
+
+#data = hash, season = string
+#return average age of the contestants
 def get_average_age_for_season(data, season)
-  # code here
+  average_age = 0
+  data.each do |season_number, contestants_hashes|
+    if season_number == season
+      contestants_hashes.each do |contestants|
+        average_age += contestants["age"].to_f
+        # average_age.push(contestants["age"].to_f)
+      end
+      average_age = average_age / contestants_hashes.length
+      average_age = average_age.round
+      # binding.pry
+    end
+  end
+  average_age
 end
