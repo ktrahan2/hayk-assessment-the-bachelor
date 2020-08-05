@@ -3,19 +3,19 @@ require 'pry'
 # #data is a hash, season is a string
 # #return first name of contestant winner for the season
 # def get_first_name_of_season_winner(data, season)
-#   winner = nil
+#   winner_name = nil
 #   data.each do |season_hash, contestants_hashes|
 #     if season_hash == season
 #       contestants_hashes.each do |contestant|
 #         if contestant["status"] == "Winner"
 #           # binding.pry
-#           winner = contestant["name"].split
-#           winner = winner[0]
+#           winner_name = contestant["name"].split
+#           winner_name = winner_name[0]
 #         end
 #       end
 #     end
 #   end
-#   return winner
+#   winner_name
 #   # binding.pry
 # end
 
@@ -56,7 +56,7 @@ def count_contestants_by_hometown(data, hometown)
       end
     end
   end
-  return contestant_count
+  contestant_count
 end
 
 #data = hash, hometown = string
