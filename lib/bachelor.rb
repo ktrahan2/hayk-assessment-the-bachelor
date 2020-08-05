@@ -62,20 +62,35 @@ def get_occupation(data, hometown)
 end
 
 
-#data = hash, season = string
-#return average age of the contestants
+# #data = hash, season = string
+# #return average age of the contestants
+# def get_average_age_for_season(data, season)
+#   average_age = 0
+#   data.each do |season_number, contestants_hashes|
+#     if season_number == season
+#       #alternate data[season].each do |contestants| faster way for the future
+#       contestants_hashes.each do |contestants|
+#         average_age += contestants["age"].to_f
+#       end
+#       average_age = average_age / contestants_hashes.length
+#       average_age = average_age.round
+#       # binding.pry
+#     end
+#   end
+#   average_age
+# end
+
+#2nd try for shorter verison without using each as much
+
 def get_average_age_for_season(data, season)
-  average_age = 0
-  data.each do |season_number, contestants_hashes|
-    if season_number == season
-      #alternate data[season].each do |contestants| faster way for the future
-      contestants_hashes.each do |contestants|
-        average_age += contestants["age"].to_f
-      end
-      average_age = average_age / contestants_hashes.length
-      average_age = average_age.round
-      # binding.pry
-    end
+  average = 0
+  get_contestant_age = data[season].collect do |contestants|
+    contestants["age"].to_i
   end
-  average_age
+  summed_ages = get_contestant_age.reduce(0) do |sum, age|
+    sum += age
+  end
+  contestant_total = get_contestant_age.count.to_f
+  average = (summed_ages / contestant_total).round
 end
+
