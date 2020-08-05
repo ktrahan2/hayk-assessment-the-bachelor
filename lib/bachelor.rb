@@ -1,23 +1,33 @@
 require 'pry'
 
-#data is a hash, season is a string
-#return first name of contestant winner for the season
+# #data is a hash, season is a string
+# #return first name of contestant winner for the season
+# def get_first_name_of_season_winner(data, season)
+#   winner = nil
+#   data.each do |season_hash, contestants_hashes|
+#     if season_hash == season
+#       contestants_hashes.each do |contestant|
+#         if contestant["status"] == "Winner"
+#           # binding.pry
+#           winner = contestant["name"].split
+#           winner = winner[0]
+#         end
+#       end
+#     end
+#   end
+#   return winner
+#   # binding.pry
+# end
+
+#2nd attempt to write it shorter without using each as much
+
 def get_first_name_of_season_winner(data, season)
-  winner = nil
-  data.each do |season_hash, contestants_hashes|
-    if season_hash == season
-      contestants_hashes.each do |contestant|
-        if contestant["status"] == "Winner"
-          # binding.pry
-          winner = contestant["name"].split
-          winner = winner[0]
-        end
-      end
-    end
+  data[season].select do |contestant|
+    contestant["status"] == "Winner"
+    return contestant["name"].split[0]
   end
-  return winner
-  # binding.pry
 end
+
 
 #data = hash, occupation = string
 #return contestants name matching occupation
@@ -83,8 +93,7 @@ end
 #2nd try for shorter verison without using each as much
 
 def get_average_age_for_season(data, season)
-  average = 0
-  get_contestant_age = data[season].collect do |contestants|
+  get_contestant_age = data[season].map do |contestants|
     contestants["age"].to_i
   end
   summed_ages = get_contestant_age.reduce(0) do |sum, age|
